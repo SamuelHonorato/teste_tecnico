@@ -13,7 +13,7 @@ defmodule Playground do
     ShoppingList.calculate_value(items, people)
   end
 
-  def generate(:items) do
+  defp generate(:items) do
     [
       %Item{name: "Arroz", quantity: 10, price: "R$ 3,00", unity: :kg},
       %Item{name: "Feijão", quantity: 5, price: "R$ 8,98", unity: :kg},
@@ -22,7 +22,7 @@ defmodule Playground do
     ]
   end
 
-  def generate(:people) do
+  defp generate(:people) do
     [
       %Person{email: "igorpaulothomasteixeira_@isometro.com.br"},
       %Person{email: "erickantoniosouza-93@tera.com.br"},
@@ -33,6 +33,7 @@ defmodule Playground do
       %Person{email: "aliceestersales..aliceestersales@caiuas.com.br"}
     ]
   end
+
 end
 
 Playground.run() |> IO.inspect()
