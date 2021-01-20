@@ -3,25 +3,14 @@ defmodule Playground do
   Playground: mix run priv/playground.exs
   """
 
-  alias Structs.{Item, Money, Person}
+  alias Structs.{Item, Person}
 
   def run() do
 
     items = generate(:items)
     people = generate(:people)
 
-    list_values_by_email =
-      ShoppingList.total_price(items, :cents)
-      |> ShoppingList.division_of_the_total_price(Enum.count(people))
-
-    case list_values_by_email do
-      value when is_list(value) ->
-        ShoppingList.merge_emails_with_values(list_values_by_email, people)
-        |> Enum.map(fn {person, money} -> {person.email, Money.format(money, :cents)} end)
-        |> Map.new()
-      :error_empty_email_list -> raise "Oops. Empty email list!"
-      _ -> raise "Error"
-    end
+    ShoppingList.calculate_value(items, people)
   end
 
   def generate(:items) do
